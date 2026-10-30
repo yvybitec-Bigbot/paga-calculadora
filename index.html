@@ -54,6 +54,7 @@
   <button id="act" class="det">Actualizar precio</button>
   <div class="tt det">Tabla rápida al precio actual</div>
   <table class="det"><thead><tr><th>DOGE</th><th>Valor USD</th><th>Recibe</th></tr></thead><tbody id="tabla"></tbody></table>
+  <p class="nota" style="text-align:center;font-size:11px;color:#7F8AA3;margin:14px 0 0">Referencia orientativa. La cantidad final la fija el contrato con el precio del oráculo al pagar.</p>
 </div>
 <script>
 // Regla del contrato de prueba: PAGA = DOGE × precio ÷ 0,10 ÷ 2,5 (colateral 250 %)
@@ -114,6 +115,6 @@ calcular();
 cargarPrecio();
 setInterval(cargarPrecio, 5*60*1000);
 </script>
-<p style="position:fixed;bottom:8px;left:0;right:0;text-align:center;font-size:11px;color:#7F8AA3;margin:0">Referencia orientativa. La cantidad final la fija el contrato con el precio del oráculo al pagar.</p>
+
 </body>
 </html>
