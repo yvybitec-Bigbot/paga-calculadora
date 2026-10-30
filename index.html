@@ -77,7 +77,7 @@ function calcular(){
     const u = parseFloat(($('usd').value||'').replace(',','.')) || 0;
     const p = Math.floor(u/PRECIO_PAGA + 1e-9);
     $('paga').textContent = p.toLocaleString('es-ES') + ' PAGA';
-    $('ref').textContent = precio ? 'Referencia: $' + usd(u) + ' equivalen a ' + (u/precio).toLocaleString('es-ES',{maximumFractionDigits:2}) + ' DOGE hoy' : '';
+    $('ref').innerHTML = precio ? 'Respaldo de esta emisión: comprar <b>' + ((p*PRECIO_PAGA)/precio).toLocaleString('es-ES',{maximumFractionDigits:2}) + ' DOGE</b> al precio de hoy' : '';
     return;
   }
   const d = parseFloat(($('doge').value||'').replace(',','.')) || 0;
