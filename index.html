@@ -91,9 +91,10 @@ async function cargarPrecio(){
 }
 $('doge').addEventListener('input', calcular);
 $('act').addEventListener('click', cargarPrecio);
-function version(v){document.body.classList.toggle('v2',v===2);$('b1').classList.toggle('on',v===1);$('b2').classList.toggle('on',v===2);}
+function version(v){history.replaceState(null,'',v===2?'#v2':location.pathname+location.search);document.body.classList.toggle('v2',v===2);$('b1').classList.toggle('on',v===1);$('b2').classList.toggle('on',v===2);}
 $('b1').addEventListener('click',()=>version(1));
 $('b2').addEventListener('click',()=>version(2));
+if(location.hash==='#v2')version(2);
 cargarPrecio();
 setInterval(cargarPrecio, 5*60*1000);
 </script>
