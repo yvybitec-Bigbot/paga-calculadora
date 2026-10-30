@@ -20,6 +20,12 @@
   .small{font-size:14px;color:#C8CFDD;margin-top:6px}
   .precio{margin-top:20px;font-size:13px;color:#AEB6C6;line-height:1.5}
   button{margin-top:10px;background:none;border:1px solid #C0C6D0;color:#fff;border-radius:10px;padding:6px 12px;font-size:13px;cursor:pointer}
+  table{width:100%;margin-top:22px;border-collapse:collapse;font-size:15px}
+  th{font-weight:600;color:#E7C766;padding:8px 6px;border-bottom:1px solid #C9A646;text-align:right}
+  td{padding:9px 6px;border-bottom:1px solid #2A3F6E;text-align:right}
+  th:first-child,td:first-child{text-align:left}
+  .tt{margin-top:24px;text-align:left;font-size:16px;color:#E7C766;font-weight:600}
+  body{padding-bottom:60px}
 </style>
 </head>
 <body>
@@ -36,6 +42,8 @@
   </div>
   <div class="precio" id="precio">Cargando el precio del DOGE…</div>
   <button id="act">Actualizar precio</button>
+  <div class="tt">Tabla rápida al precio actual</div>
+  <table><thead><tr><th>DOGE</th><th>Valor USD</th><th>Recibe</th></tr></thead><tbody id="tabla"></tbody></table>
 </div>
 <script>
 // Regla del contrato de prueba: PAGA = DOGE × precio ÷ 0,10 ÷ 2,5 (colateral 250 %)
@@ -43,7 +51,15 @@ const PRECIO_PAGA = 0.10, COLATERAL = 2.5;
 let precio = 0;
 const $ = id => document.getElementById(id);
 const usd = v => v.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2});
+function tabla(){
+  const filas=[1000,5000,10000,50000,100000].map(d=>{
+    const v=d*precio, p=Math.floor(v/PRECIO_PAGA/COLATERAL);
+    return '<tr><td>'+d.toLocaleString('es-ES')+' DOGE</td><td>$'+usd(v)+'</td><td>'+p.toLocaleString('es-ES')+' PAGA</td></tr>';
+  });
+  $('tabla').innerHTML = precio ? filas.join('') : '';
+}
 function calcular(){
+  tabla();
   const d = parseFloat(($('doge').value||'').replace(',','.')) || 0;
   if(!precio){ $('paga').textContent='–'; return; }
   const valor = d*precio;
